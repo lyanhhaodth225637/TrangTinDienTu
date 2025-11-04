@@ -30,10 +30,12 @@ if ($makienthuc) {
             $message_type = 'success';
         } else {
             $message = 'Không tìm thấy bài viết kiên thức với mã: ' . htmlspecialchars($makienthuc);
+
             $message_type = 'danger';
         }
     } catch (PDOException $e) {
         $message = 'Lỗi khi xóa bài viết kiên thức: ' . $e->getMessage();
+        //làm lại nè
         $message_type = 'danger';
     }
 } else {
