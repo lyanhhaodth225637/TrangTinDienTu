@@ -18,23 +18,23 @@ if (!isset($_SESSION['user']['manguoidung'])) {
 }
 
 // Lấy thông tin người dùng hiện tại
-$user_id = $_SESSION['user']['manguoidung'];
-try {
-    $sql_user = "SELECT manguoidung, ten, mail, anhdaidien, vaitro 
-                 FROM tbl_nguoidung 
-                 WHERE manguoidung = ?";
-    $cmd_user = $conn->prepare($sql_user);
-    $cmd_user->execute([$user_id]);
-    $user = $cmd_user->fetch(PDO::FETCH_ASSOC);
-    if (!$user) {
-        $message = 'Không tìm thấy thông tin người dùng!';
-        $message_type = 'danger';
-    }
-} catch (PDOException $e) {
-    $message = 'Lỗi khi lấy thông tin người dùng: ' . htmlspecialchars($e->getMessage());
-    $message_type = 'danger';
-    error_log("User Info Error: " . $e->getMessage());
-}
+// $user_id = $_SESSION['user']['manguoidung']; //update 
+// try {
+//     $sql_user = "SELECT manguoidung, ten, mail, anhdaidien, vaitro 
+//                  FROM tbl_nguoidung 
+//                  WHERE manguoidung = ?";
+//     $cmd_user = $conn->prepare($sql_user);
+//     $cmd_user->execute([$user_id]);
+//     $user = $cmd_user->fetch(PDO::FETCH_ASSOC);
+//     if (!$user) {
+//         $message = 'Không tìm thấy thông tin người dùng!';
+//         $message_type = 'danger';
+//     }
+// } catch (PDOException $e) {
+//     $message = 'Lỗi khi lấy thông tin người dùng: ' . htmlspecialchars($e->getMessage());
+//     $message_type = 'danger';
+//     error_log("User Info Error: " . $e->getMessage());
+// }
 
 // Xử lý đăng ký Editor
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['dangky_editor'])) {
@@ -282,7 +282,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['dangky_editor'])) {
                                 lại</a>
                         </form>
 
-                        
+
                     </div>
                 <?php endif; ?>
             </div>
