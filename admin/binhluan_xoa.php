@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . '/../config/ketnoi.php';
 
-// Kiểm tra kết nối
+
 if (!$conn) {
     die("Kết nối cơ sở dữ liệu thất bại: " . $conn->errorInfo());
 }
