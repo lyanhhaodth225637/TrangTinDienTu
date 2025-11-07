@@ -7,7 +7,7 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['user']['role']) || !isset($_S
     header('Location: login.php?error=please_login');
     exit;
 }
-
+// Sửa
 // Kiểm tra kết nối
 if (!$conn) {
     header('Location: baiviet.php?message=Kết nối cơ sở dữ liệu thất bại&type=danger');
@@ -68,6 +68,7 @@ $params = [];
 
 if ($keyword != '') {
     $sql_where = ' WHERE kt.tieude LIKE ?';
+
     $params[] = "%$keyword%";
 }
 
@@ -84,6 +85,7 @@ try {
 } catch (PDOException $e) {
     $message = 'Lỗi khi đếm bài viết: ' . htmlspecialchars($e->getMessage());
     $message_type = 'danger';
+
     $totalRecords = 0;
     $totalPages = 0;
 }
@@ -95,6 +97,7 @@ if ($totalRecords > 0) {
         $sql_select = 'SELECT kt.makienthuc, kt.manguoidung, kt.machude, kt.tieude, kt.hinhanh, kt.noidung, kt.nguon, kt.duongdan, kt.luotxem, kt.luotchiase, kt.ngaytao, kt.trangthai, cd.tenchude, nd.ten';
         $sql_order = ' ORDER BY kt.ngaytao DESC LIMIT ? OFFSET ?';
         $params[] = $perPage;
+
         $params[] = $offset;
 
         $cmd = $conn->prepare($sql_select . $sql_base . $sql_where . $sql_order);
@@ -105,6 +108,7 @@ if ($totalRecords > 0) {
         }
         $cmd->execute();
         $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+
     } catch (PDOException $e) {
         $message = 'Lỗi khi lấy danh sách bài viết: ' . htmlspecialchars($e->getMessage());
         $message_type = 'danger';
