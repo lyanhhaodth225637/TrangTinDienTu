@@ -1,7 +1,7 @@
 <?php
 session_start();
 include __DIR__ . '/../config/ketnoi.php';
-
+// them dong
 // Kiểm tra quyền truy cập
 if (!isset($_SESSION['user']) || !isset($_SESSION['user']['role']) || !isset($_SESSION['user']['manguoidung']) || !in_array($_SESSION['user']['role'], [0, 1])) {
     header('Location: login.php?error=please_login');
