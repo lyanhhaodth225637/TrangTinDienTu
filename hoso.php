@@ -162,7 +162,7 @@ $default_avatar = 'uploads/avatars/avt.jpg'; // Avatar mặc định
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" type="image/png" href="favicon_io/icons.png">
-    <!-- <style>
+     <style>
         .profile-card {
             background: #fff;
             padding: 2rem;
@@ -325,7 +325,7 @@ $default_avatar = 'uploads/avatars/avt.jpg'; // Avatar mặc định
             font-size: 0.75rem;
             color: #65676b;
         }
-    </style> -->
+    </style> 
 </head>
 
 <body>
