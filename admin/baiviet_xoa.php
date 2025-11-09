@@ -9,10 +9,8 @@ if (!$conn) {
 // Biến để lưu thông báo
 $message = '';
 $message_type = '';
-
 // Nhận machude từ URL
 $makienthuc = isset($_GET['makienthuc']) ? trim($_GET['makienthuc']) : '';
-
 if ($makienthuc) {
     try {
         // Kiểm tra xem bài viết kiên thức có tồn tại không
@@ -30,12 +28,10 @@ if ($makienthuc) {
             $message_type = 'success';
         } else {
             $message = 'Không tìm thấy bài viết kiên thức với mã: ' . htmlspecialchars($makienthuc);
-
             $message_type = 'danger';
         }
     } catch (PDOException $e) {
         $message = 'Lỗi khi xóa bài viết kiên thức: ' . $e->getMessage();
-        //làm lại nè
         $message_type = 'danger';
     }
 } else {
