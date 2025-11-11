@@ -12,7 +12,7 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['user']['role']) || !in_array(
 if (!$conn) {
     die("Kết nối cơ sở dữ liệu thất bại.");
 }
-
+//Sua
 // Biến để lưu thông báo
 $message = '';
 $message_type = ''; // success hoặc danger
