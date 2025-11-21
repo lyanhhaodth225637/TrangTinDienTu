@@ -2,22 +2,18 @@
 session_start();
 include __DIR__ . '/../config/ketnoi.php';
 
-// Kiểm tra quyền truy cập
 if (!isset($_SESSION['user']) || !isset($_SESSION['user']['role']) || !in_array($_SESSION['user']['role'], [0, 1])) {
     header('Location: login.php?error=please_login');
     exit;
 }
 
-// Kiểm tra kết nối
 if (!$conn) {
     die("Kết nối cơ sở dữ liệu thất bại.");
 }
 
-// Biến để lưu thông báo
 $message = '';
 $message_type = '';
 
-// Nhận số trang và từ khóa
 $page = isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] > 0 ? (int) $_GET['page'] : 1;
 $perPage = 10;
 $offset = ($page - 1) * $perPage;
@@ -39,7 +35,6 @@ if ($keyword != '') {
 }
 $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
 
-// Đếm tổng số bản ghi
 $countSql = 'SELECT COUNT(*) as total FROM tbl_chude' . ($keyword != '' ? ' WHERE tenchude LIKE ?' : '');
 $countCmd = $conn->prepare($countSql);
 if ($keyword != '') {
@@ -68,14 +63,8 @@ $totalPages = ceil($totalRecords / $perPage);
 
 <body>
     <div class="d-flex">
-        <!-- Sidebar -->
-        <?php
-        include_once 'sidebar.php';
-        ?>
-
-        <!-- Main Content -->
+        <?php include_once 'sidebar.php'; ?>
         <div class="main-content w-100">
-            <!-- Top Navbar -->
             <nav class="top-navbar d-flex justify-content-between align-items-center">
                 <div>
                     <h5 class="mb-0" id="page-title">Quản Lý Danh Mục</h5>
@@ -92,8 +81,6 @@ $totalPages = ceil($totalRecords / $perPage);
                     </div>
                 </div>
             </nav>
-
-            <!-- Content Area -->
             <div class="content-area" id="content-area">
                 <div id="categories-section">
                     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -101,7 +88,6 @@ $totalPages = ceil($totalRecords / $perPage);
                         <a href="danhmuc_them.php" class="btn btn-primary"><i class="fas fa-plus"></i> Thêm danh mục</a>
                     </div>
                     <div class="table-container">
-                        <!-- Hiển thị thông báo -->
                         <?php if ($message || isset($_GET['message'])): ?>
                             <div class="alert alert-<?php echo $message_type ?: htmlspecialchars($_GET['type']); ?> alert-dismissible fade show"
                                 role="alert">
@@ -109,15 +95,11 @@ $totalPages = ceil($totalRecords / $perPage);
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         <?php endif; ?>
-
-                        <!-- Form tìm kiếm -->
                         <form method="get" class="mb-3 d-flex">
                             <input type="text" name="keyword" class="form-control me-2"
                                 placeholder="Tìm kiếm danh mục..." value="<?php echo htmlspecialchars($keyword); ?>">
                             <button class="btn btn-outline-primary" type="submit"><i class="fas fa-search"></i></button>
                         </form>
-
-                        <!-- Bảng danh sách chủ đề -->
                         <table class="table table-hover">
                             <thead class="table-light">
                                 <tr>
@@ -148,11 +130,8 @@ $totalPages = ceil($totalRecords / $perPage);
                                     }
                                 }
                                 ?>
-
                             </tbody>
                         </table>
-
-                        <!-- Phân trang -->
                         <nav>
                             <ul class="pagination justify-content-center">
                                 <li class="page-item <?php echo $page <= 1 ? 'disabled' : ''; ?>">
@@ -176,7 +155,6 @@ $totalPages = ceil($totalRecords / $perPage);
             </div>
         </div>
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 
